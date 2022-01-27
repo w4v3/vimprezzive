@@ -1,0 +1,74 @@
+*vimprezzive.txt*  Presentations in Vim, especially for Haskell code.
+*vimprezzive*
+
+==============================================================================
+CONTENTS                                                  *vimprezzive-contents*
+
+    Introduction                          |vimprezzive-introduction|
+    Install                               |vimprezzive-install|
+    Usage                                 |vimprezzive-usage|
+    Commands                              |vimprezzive-commands|
+    Highlighting                          |vimprezzive-highlight|
+    License                               |vimprezzive-license|
+
+
+==============================================================================
+INTRODUCTION                                          *vimprezzive-introduction*
+
+A very simple presentation plugin for Vim (tested only with neovim).
+Supports bird-style literate Haskell.
+
+==============================================================================
+INSTALL                                                    *vimprezzive-install*
+
+Install `vimprezzive` pluggin, for example
+>
+    git clone https://github.com/w4v3/vimprezzive
+
+into your plugin directory.
+
+==============================================================================
+USAGE                                                        *vimprezzive-usage*
+
+There are two types of files, `.vimprezmd.lhs` and `.vimprez.lhs`.
+
+A `vimprezmd` file contains the information that goes into the presentation;
+see |vimprezzive-markdown| for a description of the language.
+
+By using `:Compile` in a `.vimprezmd.lhs` file, a `.vimprez.lhs` file is
+created and opened in presentation mode. See |vimprezzive-commands|.
+This file should not be reused and is overwritten with every `:Compile`
+command.
+
+==============================================================================
+COMMANDS                                                  *vimprezzive-commands*
+                                                          *vimprezzive-mappings*
+
+In `vimprezmd` files, a single command is exposed.
+
+:Compile      Convert the current file into a `.vimprez.lhs` file and open it.
+
+The following commands and mappings are available in `vimprez` files.
+
+:PrevFrame    Go to the next frame in the presentation.
+:NextFrame    Go to the previous frame in the presentation.
+:Resume       Restart presentation mode from the last viewed slide.
+q             Quit presentation mode.
+<Right>       Same as `:NextFrame`.
+<Left>        Same as `:PrevFrame`.
+
+==============================================================================
+HIGHLIGHTING                                             *vimprezzive-highlight*
+
+VPmdType                  Text between backticks `.
+VPmdString                Text between double tildes ~~ .
+VPmdSpecial               Text between degree symbols °.
+VPmdPreProc               Symbols hidden in `vimprez` files, like `=pause` and
+                          markdown rulers.
+
+==============================================================================
+LICENSE                                                    *vimprezzive-license*
+
+This work is in the public domain.
+
+vim:tw=78:ts=8:ft=help:norl:
