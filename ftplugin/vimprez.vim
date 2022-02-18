@@ -126,3 +126,49 @@ function s:Run()
 endfunction
 
 call s:Run()
+
+" HTML conversion
+
+command ConvertHTML call s:ConvertHTML()
+
+let s:jspath=expand('<sfile>:p:h') . "/converthtml.js"
+" using TOhtml
+function s:ConvertHTML()
+  call s:FoldAll()
+
+  let g:html_number_lines=0
+  let g:html_no_foldcolumn=1
+  let g:html_dynamic_folds=1
+  silent TOhtml
+  
+  " remove the ~~~
+  %substitute/^<span class="PreProc">\zs\~\~\~*\ze<\/span>$//e
+  " Conceal = VPmdSpecial is somehow not respected
+  %substitute/.Conceal { .*//e
+  /.VPmdSpecial
+  normal! yyp0wciwConceal
+  " include js script for navigation
+  normal! G
+  execute "read" . s:jspath
+  wq
+  call s:Resume()
+endfunction
+
+" wrap every slide into a fold to be used in the html file by js
+function s:FoldAll()
+  normal! zE
+  let linecount=1
+  let framestart=0
+  let frameend=1
+  for line in getbufline(bufnr(),1,"$")
+    if line =~ '^\~\~\~\+'
+      let frameend=linecount
+      execute eval(framestart+1) . "," . eval(frameend) . "fold"
+      execute eval(framestart+1) . "," . eval(frameend) . "foldopen"
+      let framestart=linecount
+    endif
+    let linecount+=1
+  endfor
+endfunction
+
+

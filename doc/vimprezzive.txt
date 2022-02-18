@@ -40,6 +40,8 @@ created and opened in presentation mode. See |vimprezzive-commands|.
 This file should not be reused and is overwritten with every `:Compile`
 command.
 
+You can create an HTML version of your presentation using `:ConvertHTML`.
+
 ==============================================================================
 COMMANDS                                                  *vimprezzive-commands*
                                                           *vimprezzive-mappings*
@@ -57,6 +59,7 @@ The following commands and mappings are available in `vimprez` files.
 q             Quit presentation mode.
 <Right>       Same as `:NextFrame`.
 <Left>        Same as `:PrevFrame`.
+:ConvertHTML  A navigatable HTML file is created using `:TOhtml`.
 
 ==============================================================================
 HIGHLIGHTING                                             *vimprezzive-highlight*
