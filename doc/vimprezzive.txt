@@ -53,6 +53,7 @@ The following commands and mappings are available in `vimprez` files.
 :PrevFrame    Go to the next frame in the presentation.
 :NextFrame    Go to the previous frame in the presentation.
 :Resume       Restart presentation mode from the last viewed slide.
+:Restart      Restart presentation from the beginning, resetting the timer.
 q             Quit presentation mode.
 <Right>       Same as `:NextFrame`.
 <Left>        Same as `:PrevFrame`.

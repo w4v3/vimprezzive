@@ -24,6 +24,7 @@ nnoremap q zE:nunmap q<CR>
 command NextFrame call s:NextFrame()
 command PrevFrame call s:PrevFrame()
 command Resume call s:Resume()
+command Restart call s:Run()
 
 " use folds to hide everything except the current frame
 function s:GoTo(frame)

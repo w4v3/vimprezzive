@@ -56,7 +56,7 @@ function s:Compile()
   execute 'edit '.fn
 endfunction
 
-" add 4 spaces in front of every line (code indented by 8 spaces)
+" add 4 spaces in front of every line
 " remove newlines at beginning and end (except around > code)
 " center the result on the page vertically
 function s:TransformList(lst,row,col,sec)
@@ -76,7 +76,7 @@ function s:TransformList(lst,row,col,sec)
   endif
   for i in range(len(a:lst))
     if a:lst[i][0] =~ '[>!]'
-      let a:lst[i]=a:lst[i][0].'        '.a:lst[i][1:]
+      let a:lst[i]=a:lst[i][0].'    '.a:lst[i][1:]
     elseif a:lst[i] !~ '^\~\~\~\+$'
       let a:lst[i]='    '.a:lst[i]
     endif
