@@ -136,6 +136,8 @@ let s:jspath=expand('<sfile>:p:h') . "/converthtml.js"
 function s:ConvertHTML()
   call s:FoldAll()
 
+  let title=get(b:,'vimP_title',"\1")
+
   let g:html_number_lines=0
   let g:html_no_foldcolumn=1
   let g:html_dynamic_folds=1
@@ -143,10 +145,21 @@ function s:ConvertHTML()
   
   " remove the ~~~
   %substitute/^<span class="PreProc">\zs\~\~\~*\ze<\/span>$//e
+  " set the title
+  execute '%substitute/^<title>\zs\(.\{-}\)\ze<\/title>$/'.title."/e"
   " Conceal = VPmdSpecial is somehow not respected
   %substitute/.Conceal { .*//e
   /.VPmdSpecial
   normal! yyp0wciwConceal
+  " set background colors to vim colors
+  let slidebgcol=synIDattr(synIDtrans(hlID("Ignore")), "fg#")
+  execute '%substitute/^pre { .*background-color: \zs#......\ze.* }/'.slidebgcol."/e"
+  let bgcol=synIDattr(synIDtrans(hlID("LineNr")), "bg#")
+  execute '%substitute/^body { .*background-color: \zs#......\ze.* }/'.bgcol."/e"
+  " restrict page width
+  %substitute/^pre { font-family.*\zs\ze}/display: inline-block; /e
+  " we don't want hovering to make a mess with the closed folds
+  %substitute/^.closed-fold:hover.*\n//e
   " include js script for navigation
   normal! G
   execute "read" . s:jspath
