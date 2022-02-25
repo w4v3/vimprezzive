@@ -7,23 +7,34 @@ if ('onhashchange' in window) {
   window.onhashchange = GoToFrameHash;
 }
 
+if(window.location.hash) {
+  GoToFrameHash();
+} 
+
+function goUp() {
+  if (frame <= 1) return;
+  window.location.hash = frame-1;
+}
+
+function goDown() {
+  let afterframe = frame+offset+1;
+  if (!(document.getElementById("fold"+afterframe))) return;
+  window.location.hash = frame+1;
+}
+
 // left arrow: go back, right arrow: go forth
 document.onkeydown = function (e) {
   switch (e.keyCode) {
     case 37: // left key
-      if (frame <= 1) return;
-      window.location.hash = frame-1;
+      goUp();
       break;
     case 39: // right key
-      let afterframe = frame+offset+1;
-      if (!(document.getElementById("fold"+afterframe))) return;
-      window.location.hash = frame+1;
+      goDown();
       break;
   }
 }
 
-function GoToFrameHash()
-{
+function GoToFrameHash() {
   var lineNum;
   frameNum = window.location.hash;
   frameNum = offset+parseInt(frameNum.substr(1));
@@ -42,7 +53,15 @@ function goToFrame(num) {
   frame = num - offset;
 }
 
-window.location.hash = frame;
-window.location.hash = frame+1; // dirty, but otherwise refreshing the page messes up everything
+function GoToWheel(e) {
+  if (e.deltaY < 0) {
+    goUp();
+  } else if (e.deltaY > 0) {
+    goDown();
+  }
+}
+
+window.onwheel = GoToWheel;
+
 window.location.hash = frame;
 </script>
