@@ -62,6 +62,7 @@ You can use the following markdown things:
 * * * * ***bold italics***
 * ~ ~strikethrough~
 * _ _ __underline__
+* ! !data Haskell = Syntax | Highlighting!
 
 * `use your colorscheme's Type font with backticks`
 * ~~use your colorscheme's String font with double tildes~~

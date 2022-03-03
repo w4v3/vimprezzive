@@ -12,6 +12,7 @@ let b:current_syntax = "lhaskell"
 
 syntax region lhsHaskellBirdTrack start="^>" end="$" contains=@haskellTop,lhsBirdTrack
 syntax region lhsHaskellFakeTrack start="^!" end="$" contains=@haskellTop,lhsFakeTrack
+syntax region lhsHaskellLocalTrack matchgroup=lhsHaskellLocalTrackDelimiter start="\w\@<!!\S\@=" end="\S\@<=!\w\@!" contains=@haskellTop concealends oneline
 syntax match lhsBirdTrack "^>" contained
 syntax match lhsFakeTrack "^!" contained
 highlight link lhsBirdTrack Comment
